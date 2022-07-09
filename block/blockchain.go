@@ -1,4 +1,4 @@
-package main
+package block
 
 import (
 	"crypto/sha256"
@@ -185,28 +185,4 @@ func (t *Transaction) MarshalJSON() ([]byte, error){
 		Recipient: t.recipientBlockchainAddress,
 		Value: t.value,
 	})
-}
-
-func init(){
-	log.SetPrefix("Blockchain: ")
-}
-
-func main()  {
-	log.Println("Creating new Blockchain Test")
-	myBlockchainAddress :="my_address"
-	bc := NewBlockchain(myBlockchainAddress)
-	bc.Print()
-	
-	bc.AddTransaction("A", "B", 10.0)
-	bc.Mining()
-	bc.Print()
-
-	bc.AddTransaction("C", "D", 20.0)
-	bc.AddTransaction("X", "Y", 3.0)
-	bc.Mining()
-	bc.Print()
-
-	fmt.Printf("my_address %.1f\n", bc.CalculateTotalAmount("my_address"))
-	fmt.Printf("C %.1f\n", bc.CalculateTotalAmount("C"))
-	fmt.Printf("D %.1f\n", bc.CalculateTotalAmount("D"))
 }
